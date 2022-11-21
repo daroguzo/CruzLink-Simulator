@@ -7,11 +7,17 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import kr.co.direa.cruzlinksimulator.dto.Test;
 
-public class TcpServerRun {
+public class TcpServer {
 
-    public static void main(String[] args) throws Exception{
+    private final Test test;
 
+    public TcpServer(Test test) {
+        this.test = test;
+    }
+
+    public void run() throws InterruptedException {
         // Configure the Server
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -27,12 +33,12 @@ public class TcpServerRun {
                         @Override
                         protected void initChannel(SocketChannel channel) throws Exception {
                             ChannelPipeline pipeline = channel.pipeline();
-                            pipeline.addLast(new TcpServerHandler());
+                            pipeline.addLast(new TcpServerHandler(test.getEncoding().getValue()));
                         }
                     });
 
             // Start the server
-            ChannelFuture future = bootstrap.bind(9999).sync();
+            ChannelFuture future = bootstrap.bind(Integer.parseInt(test.getPort())).sync();
 
             // Wait until the server socket is closed
             future.channel().closeFuture().sync();

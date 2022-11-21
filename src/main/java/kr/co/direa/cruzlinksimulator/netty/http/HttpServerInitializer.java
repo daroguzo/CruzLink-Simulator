@@ -1,4 +1,4 @@
-package http;
+package kr.co.direa.cruzlinksimulator.netty.http;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

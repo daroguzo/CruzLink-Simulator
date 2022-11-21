@@ -1,2 +1,5 @@
-package kr.co.direa.cruzlinksimulator.constant;public enum Role {
+package kr.co.direa.cruzlinksimulator.constant;
+
+public enum Role {
+    SERVER, CLIENT
 }

@@ -1,4 +1,4 @@
-package http;
+package kr.co.direa.cruzlinksimulator.netty.http;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

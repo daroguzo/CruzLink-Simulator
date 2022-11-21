@@ -7,12 +7,17 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import kr.co.direa.cruzlinksimulator.dto.Test;
 
-public class TcpClientRun {
-    private static final String HOST = "192.168.1.205";
-    private static final int PORT = 19001;
+public class TcpClient {
 
-    public static void main(String[] args) throws Exception{
+    private final Test test;
+
+    public TcpClient(Test test) {
+        this.test = test;
+    }
+
+    public void run() throws Exception{
         NioEventLoopGroup group = new NioEventLoopGroup();
 
         try {
@@ -23,11 +28,12 @@ public class TcpClientRun {
                         @Override
                         protected void initChannel(SocketChannel channel) throws Exception {
                             ChannelPipeline pipeline = channel.pipeline();
-                            pipeline.addLast(new TcpClientHandler());
+                            pipeline.addLast(new TcpClientHandler(test.getEncoding().getValue(),
+                                    test.getTestData()));
                         }
                     });
             // Start the client
-            ChannelFuture future = bootstrap.connect(HOST, PORT).sync();
+            ChannelFuture future = bootstrap.connect(test.getHost(), Integer.parseInt(test.getPort())).sync();
 
             // Wait until the server socket is closed
             future.channel().closeFuture().sync();

@@ -1,1 +1,25 @@
+server:
+  port: 13000
 
+spring:
+  ## database source info
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: CRUZSTABLE
+    password: whwkrwk02
+    url: jdbc:oracle:thin:@192.168.1.226:11521/orcl
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        format_sql: true
+#    database: oracle
+#    database-platform: Oracle12cDialect
+
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        type: trace

@@ -1,22 +1,24 @@
 package kr.co.direa.cruzlinksimulator.controller;
 
 import kr.co.direa.cruzlinksimulator.dto.Test;
-import org.springframework.web.bind.annotation.PostMapping;
+import kr.co.direa.cruzlinksimulator.service.SimulService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/fixed")
-public class FixedRestController {
+import javax.validation.Valid;
 
-    @PostMapping("/client")
-    public Test roleClient(@RequestBody Test data) {
+@RequiredArgsConstructor
+@RestController
+public class SimulRestController {
 
-        return null;
-    }
+    private final SimulService simulService;
 
-    @PostMapping("/server")
-    public Test roleServer(@RequestBody Test data) {
-
+    @GetMapping("/test")
+    public Test test(@RequestBody @Valid Test test) throws Exception {
+        System.out.println(test);
+        simulService.start(test);
         return null;
     }
 }
